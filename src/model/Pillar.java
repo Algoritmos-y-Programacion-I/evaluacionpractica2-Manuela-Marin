@@ -4,11 +4,21 @@ public class Pillar {
 
     private String name;
     private Project[] projects;
+    private int projectCount;
 
     public Pillar(String name) {
         this.name = name;
         projects = new Project[50];
+        projectCount = 0;
     }
+
+    
+
+    public String getName() {
+        return name;
+    }
+
+
 
     /**
      * Descripcion: Añade un nuevo Project al arreglo projects
@@ -22,7 +32,16 @@ public class Pillar {
      */
     public boolean registerProject(Project newProject) {
 
-        return false;
+        if (projectCount < projects.length) {
+            projects[projectCount] = newProject;
+            projectCount++;
+            return true;
+
+        }else{
+
+            return false;
+        }
+        
     }
 
     /**
@@ -33,10 +52,13 @@ public class Pillar {
      */
     public String getProjectList() {
 
-        String list = "";
-
+        String list = "Proyectos del pilar" +name+ "\n";
+        for (int i = 0; i < projectCount; i++) {
+            list += projects[i].toString() + "\n";
+        }
         return list;
     }
 
 
 }
+

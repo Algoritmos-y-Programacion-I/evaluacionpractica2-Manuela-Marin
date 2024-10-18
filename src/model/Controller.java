@@ -7,6 +7,10 @@ public class Controller {
     public Controller() {
 
         pillars = new Pillar[4];
+        pillars[0] = new Pillar ("Biodiversidad");
+        pillars[1] = new Pillar ("Agua");
+        pillars[2] = new Pillar ("Tratamiento de Basuras");
+        pillars[3] = new Pillar ("Energia");
 
     }
 
@@ -17,7 +21,11 @@ public class Controller {
      *         contrario
      */
     public boolean registerProjectInPillar(int pillarType, String id, String name, String description,boolean status) {
-
+        
+        if (pillarType >= 0 && pillarType < pillars.length) {
+            Project newProject = new Project(id, name, description, status);
+            return pillars[pillarType].registerProject(newProject);
+        }
         return false;
     }
 
@@ -33,6 +41,11 @@ public class Controller {
 
         String query = "";
 
+        if (pillarType >= 0 && pillarType < pillars.length) {
+            query = pillars[pillarType].getProjectList();
+        }else{
+            query = "Pilar no encontrado.";
+        }
         return query;
 
     }
